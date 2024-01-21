@@ -10,7 +10,7 @@ class SpotifyClient:
     def __init__(self, client_id):
         self.client_id = client_id
         self.code_challenge = self._get_code_challenge()
-        self.autorizacion = self._get_authorization_code()
+        self.authorization = self._get_authorization_code()
         #self.access_token = self._get_access_token()
 
     def _get_code_challenge(self):
@@ -26,7 +26,7 @@ class SpotifyClient:
         params = {
             "client_id": self.client_id,
             "response_type": "code",
-            "redirect_uri": "http://localhost:3000",  
+            "redirect_uri": "http://localhost:8000",  
             "scope": "user-read-private user-read-email",  
             "code_challenge_method": "S256",
             "code_challenge": self.code_challenge
@@ -56,4 +56,4 @@ class SpotifyClient:
 CLIENT_ID = '38fdfbab5c8247ee8736fd3147a00f50'
 
 hola = SpotifyClient(CLIENT_ID)
-print(hola.autorizacion)
+print(hola.authorization)
