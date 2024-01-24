@@ -9,7 +9,7 @@ class SpotifyClient:
     def __init__(self):
         self.client_id = '38fdfbab5c8247ee8736fd3147a00f50'
         self.redirect_uri = "http://localhost:8000/callback"
-        self.scope = "user-read-private user-read-email"
+        self.scope = "user-read-private user-read-email user-top-read user-read-recently-played"
         self.code_verifier = self.__get_code_verifier()
         self.code_challenge = self.get_code_challenge()
 
@@ -53,3 +53,15 @@ class SpotifyClient:
             return response.json()  # Retorna la información del perfil del usuario
         else:
             return {"error": f"Error al obtener el perfil del usuario: {response.status_code}"}
+    
+    def get_spotify_recently_tracks(self, access_token):
+        '''Obtiene las canciones más escuchadas en las últimas 4 semanas por el usuario utilizando el token de acceso.'''
+        url = "https://api.spotify.com/v1/me/top/tracks"
+        headers = {"Authorization": f"Bearer {access_token}"}
+        params = {"time_range": "short_term"}
+        response = requests.get(url, headers=headers, params=params, timeout=5)
+        
+        if response.status_code == 200:
+            return response.json()  # Retorna las canciones escuchadas 
+        else:
+            return {"error": f"Error las canciones escuchadas: {response.status_code}"}

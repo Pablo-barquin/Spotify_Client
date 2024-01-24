@@ -1,0 +1,58 @@
+<!-- app_web/templates/app_web/user_info.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de Usuario de Spotify</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-section, .right-section {
+            width: 45%;
+        }
+        .song-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .song-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .profile {
+            text-align: center;
+        }
+        .profile img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <!-- Lista de canciones -->
+            {% for track in top_tracks.items %}
+                <div class="song-item">
+                    <img src="{{ track.album.images.0.url }}" alt="Portada">
+                    <div>
+                        <div>{{ track.name }}</div>
+                        <div>Duración: {{ track.duration_ms }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="right-section">
+            <!-- Información del perfil -->
+            <div class="profile">
+                <img src="{{ user_profile.images.0.url }}" alt="Perfil">
+                <div>{{ user_profile.display_name }}</div>
+                <div>{{ user_profile.email }}</div>
+                <!-- Otros datos del perfil -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

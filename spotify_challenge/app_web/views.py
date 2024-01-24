@@ -37,8 +37,10 @@ def spotify_callback(request):
         config = SpotifyClient()
         code_verifier = request.session.get('code_verifier')
         request.session['access_token'] = config.get_access_token(code, code_verifier)
-        print(request.session['access_token'])
+        
+        tracks_info = config.get_spotify_recently_tracks(request.session['access_token'])
         user_profile = config.get_spotify_user_profile(request.session['access_token'])
-        return JsonResponse(user_profile)
+        
+        return render(request, 'app_web/user_info.html', {'top_tracks': tracks_info, 'user_profile': user_profile})
     else:
         return JsonResponse({"error": "No se ha aceptado la solicitud"})
