@@ -43,7 +43,7 @@ class SpotifyClient:
         else:
             return {"error": f'Error al obtener el token de acceso: {response.status_code} {response.text}'}
 
-    def get_spotify_user_profile(self, access_token):
+    def get_user_profile(self, access_token):
         '''Obtiene el perfil del usuario de Spotify utilizando el token de acceso.'''
         url = "https://api.spotify.com/v1/me"
         headers = {"Authorization": f"Bearer {access_token}"}
@@ -54,7 +54,7 @@ class SpotifyClient:
         else:
             return {"error": f"Error al obtener el perfil del usuario: {response.status_code}"}
     
-    def get_spotify_recently_tracks(self, access_token):
+    def get_top_tracks(self, access_token):
         '''Obtiene las canciones más escuchadas en las últimas 4 semanas por el usuario utilizando el token de acceso.'''
         url = "https://api.spotify.com/v1/me/top/tracks"
         headers = {"Authorization": f"Bearer {access_token}"}
@@ -65,3 +65,15 @@ class SpotifyClient:
             return response.json()  # Retorna las canciones escuchadas 
         else:
             return {"error": f"Error las canciones escuchadas: {response.status_code}"}
+        
+    def get_recently_played_tracks(self, access_token):
+        """Obtiene una lista de las canciones escuchadas recientemente por el usuario."""
+        url = "https://api.spotify.com/v1/me/player/recently-played"
+        headers = {"Authorization": f"Bearer {access_token}"}
+        params = {"limit": 5}
+        response = requests.get(url, headers=headers, params=params, timeout=5)
+
+        if response.status_code == 200:
+            return response.json()  # Retorna la información del historial de reproducciones
+        else:
+            return {"error": f"Error al obtener las canciones escuchadas recientemente: {response.status_code}"}

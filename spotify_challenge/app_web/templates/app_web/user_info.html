@@ -1,8 +1,10 @@
-<!-- app_web/templates/app_web/user_info.html -->
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Perfil de Usuario de Spotify</title>
+    <title>Tus datos de Spotify</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <style>
         .container {
             display: flex;
@@ -11,22 +13,37 @@
         .left-section, .right-section {
             width: 45%;
         }
-        .song-item {
+        .song-item, .recently-played-item {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
-        .song-item img {
+        .song-item img, .recently-played-item img {
             width: 50px;
             height: 50px;
             margin-right: 10px;
         }
         .profile {
             text-align: center;
+            margin-bottom: 20px; /* Espacio entre perfil y lista de canciones recientes */
         }
         .profile img {
             width: 100px;
             height: 100px;
+        }
+        .recently-played {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -52,6 +69,16 @@
                 <div>{{ user_profile.email }}</div>
                 <!-- Otros datos del perfil -->
             </div>
+            <!-- Lista de canciones recientemente escuchadas -->
+            {% for track in tracks_recently.items %}
+            <div class="song-item">
+                <img src="{{ track.track.album.images.0.url }}" alt="Portada">
+                <div>
+                    <div>{{ track.track.artists.0.name }}</div>
+                    <div>{{ track.track.name }}</div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </body>
