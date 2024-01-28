@@ -4,34 +4,36 @@
 <html>
 <head>
     <title>PVB Spotify App</title>
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <style>
-        body {
-            background-color: #2e2d2d; /* Color de fondo gris claro */
-            font-family: Arial, sans-serif;
-            text-align: center; /* Alinea el contenido al centro */
-            padding-top: 50px; /* Espacio en la parte superior */
-        }
-        h1 {
-            font-weight: bold; /* Fuente en negrita */
-            color: white;
-        }
-        a {
-            display: inline-block; /* Hace que el enlace se comporte como un bloque para aplicar el margin */
-            margin-top: 20px; /* Espacio por encima del botón */
-            padding: 10px 20px; /* Espaciado interno del botón */
-            background-color: #4CAF50; /* Color de fondo del botón */
-            color: white; /* Color del texto del botón */
-            text-decoration: none; /* Elimina el subrayado del enlace */
-            border-radius: 5px; /* Bordes redondeados del botón */
-        }
-        a:hover {
-            background-color: #45a049; /* Cambia el color de fondo al pasar el ratón por encima */
-        }
-    </style>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> <!-- Enlace a tu CSS -->
 </head>
 <body>
-    <h1>Bienvenido a Mi Aplicación de Spotify</h1>
-    <a href="/auth/">Iniciar Sesión con Spotify</a>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{% static 'images/Logo_Personal.png' %}" alt="Logo" class="navbar-logo">
+            <span class="navbar-title">Pablo Velicias Barquín</span>
+        </div>
+        <div class="navbar-menu">
+            <div class="dropdown">
+                <button class="dropbtn">Proyectos
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="">Spotify Statistics</a>
+                    <a href="#">En Progreso</a>
+                </div>
+            </div> 
+        </div>
+    </nav>
+    <div class="Container_Logo">
+        <div class="background-animation">
+            <div class="circle"></div>
+        </div>
+        <img src="{% static 'images/favicon.ico' %}" alt="Logo APP">
+        <h1>Stadistics Spotify</h1>
+        <p>Explora tu historial más reciente y hábitos de escucha en Spotify.</p>
+        <a href="/auth/" class="login-button">Iniciar Sesión con Spotify</a>
+    </div>
 </body>
 </html>
+
