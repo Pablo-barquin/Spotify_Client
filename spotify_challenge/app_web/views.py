@@ -1,5 +1,5 @@
 from urllib.parse import urlencode, parse_qs, urlparse
-from spotify_client import SpotifyClient
+from app_web.own_code.spotify_client import SpotifyClient
 from django.shortcuts import redirect, render
 
 from django.http import JsonResponse
